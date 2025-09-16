@@ -49,5 +49,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::get('/my-courses', [StudentController::class, 'courses'])->name('student.courses');
 
+    Route::get('/api/courses', [CourseController::class, 'courseDetails'])->name('courses.details');
+
 
 });

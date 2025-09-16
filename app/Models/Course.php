@@ -15,4 +15,8 @@ class Course extends Model
         'description',
         'price',
     ];
+
+    public function students(){
+        return $this->belongsToMany(User::class, 'enrollments')->withPivot('status', 'progress', 'payment_status')->withTimestamps();
+    }
 }

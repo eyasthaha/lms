@@ -63,5 +63,31 @@ class CourseController extends Controller
         return redirect()->route('courses.list')->with('success', 'Course deleted successfully.');
     }
 
+    public function courseDetails(Request $request){
+
+        $user = $request->user();
+
+        $courses = Course::withCount('students')->get()->map(function ($course) use ($user) {
+            return [
+                'title' => $course->title,
+                'price' => $course->price,
+                'students_count' => $course->students_count,
+                'enrolled' => $user ? $course->students->contains($user->id) : false,
+            ];
+        });
+
+        return response()->json(['success' => true ,'response' => $courses]);
+    }
+
+    public function search(Request $request){
+
+        $query = $request->input('query');
+
+        $courses = Course::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+
+        return response()->json(['success' => true ,'response' => $courses]);
+    }
 
 }
