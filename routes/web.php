@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,11 +25,22 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         return view('dashboard.index');
     })->name('dashboard.index');
 
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.list');
+
+    Route::get('/course', [CourseController::class, 'create'])->name('courses.create');
+    Route::post('/course', [CourseController::class, 'store'])->name('courses.store');
+    Route::get('/course/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+    Route::patch('/course/{id}', [CourseController::class, 'update'])->name('courses.update');
+    Route::delete('/course/{id}', [CourseController::class, 'destory'])->name('courses.destroy');
+
 });
 
 //User Routes
 Route::middleware(['auth', 'role:student'])->group(function () {
+
     Route::get('/home', function () {
         return view('home');
     })->name('home');
+
+
 });

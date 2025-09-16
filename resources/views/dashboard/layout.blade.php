@@ -16,7 +16,7 @@
 <body class="bg-light">
 <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container-fluid">
-        <span class="navbar-brand fw-bold">Polling App</span>
+        <span class="navbar-brand fw-bold">LMS Admin</span>
         <div class="d-flex">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
@@ -36,11 +36,11 @@
                     <a class="nav-link text-white" href="">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="">Polls</a>
+                    <a class="nav-link text-white" href="{{route('courses.create')}}">Add Course</a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link text-white" href="{{route('polls.index')}}">Results</a>
-                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{route('courses.list')}}">Courses</a>
+                </li>
 
             </ul>
         </nav>
