@@ -35,7 +35,7 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request){
         
-        $this->courseService->addCourse($request->validated());
+        return $this->courseService->addCourse($request->validated());
 
         return redirect()->route('dashboard.index')->with('success', 'Course created successfully.');
     }
@@ -75,17 +75,6 @@ class CourseController extends Controller
                 'enrolled' => $user ? $course->students->contains($user->id) : false,
             ];
         });
-
-        return response()->json(['success' => true ,'response' => $courses]);
-    }
-
-    public function search(Request $request){
-
-        $query = $request->input('query');
-
-        $courses = Course::where('title', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
-            ->get();
 
         return response()->json(['success' => true ,'response' => $courses]);
     }

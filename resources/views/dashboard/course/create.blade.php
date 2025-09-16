@@ -25,7 +25,7 @@
                 <textarea name="description" class="form-control">{{$isEdit ? $course->description : ''}}</textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Register Course</button>
+            <button type="submit" class="btn btn-primary">{{$isEdit ? 'Update Course' : 'Register Course'}}</button>
         </form>
     </div>
 

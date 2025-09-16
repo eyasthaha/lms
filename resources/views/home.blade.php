@@ -3,6 +3,12 @@
 @section('content')
     <div class="container mt-4">
         <h2>Student</h2>
+        <form action="{{ route('home') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search courses..." value="{{$search ?? ''}}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
         @if($courses->count())
             <table class="table table-bordered">
                 <thead>
@@ -35,6 +41,9 @@
         @endif
     </div>
 
-    <!-- Material Icons CDN -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script>
+    
+
+
+</script>
 @endsection

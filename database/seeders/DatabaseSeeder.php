@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +27,18 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+        ]);
+
+        Course::create([
+            'title' => 'Python for Beginners',
+            'price' => '599',
+            'description' => 'An introductory course to Python programming.',
+        ]);
+
+        Course::create([
+            'title' => 'Java for Beginners',
+            'price' => '799',
+            'description' => 'An introductory course to Java programming.',
         ]);
         
     }

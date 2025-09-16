@@ -51,5 +51,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::get('/api/courses', [CourseController::class, 'courseDetails'])->name('courses.details');
 
+    Route::get('/search', [CourseController::class, 'search'])->name('courses.search');
+
 
 });

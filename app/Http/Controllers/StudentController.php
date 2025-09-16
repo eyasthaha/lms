@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 use App\Services\CourseService;
@@ -13,11 +14,19 @@ class StudentController extends Controller
         $this->courseService = $courseService;
     }
 
-    public function index(){
+    public function index(Request $request){
 
-        $courses = $this->courseService->list();
+        $query = Course::query();
 
-        return view('home',compact('courses'));
+        // Search by title or description
+        if ($search = $request->input('search')) {
+            $query->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        }
+
+        $courses = $query->paginate(10); // paginate results
+
+        return view('home', compact('courses', 'search'));
     }
 
     public function courses(Request $request){
@@ -55,6 +64,17 @@ class StudentController extends Controller
         ]);
 
         return redirect()->route('payment.index')->with('success', 'Enrolled in course successfully.');
+    }
+
+        public function search(Request $request){
+
+        $query = $request->input('query');
+
+        $courses = Course::where('title', 'like', '%' . $query . '%')
+            ->orWhere('description', 'like', '%' . $query . '%')
+            ->get();
+
+        return view('home',compact('courses'));
     }
 
 
