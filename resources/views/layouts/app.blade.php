@@ -17,15 +17,18 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/home') }}">
                 {{ config('app.name', 'LMS') }}
             </a>
             <div>
                 @auth
                     <span class="me-2">Hello, {{ Auth::user()->name }}</span>
+                    <a href="{{ route('student.courses') }}"
+                       class="btn btn-outline-secondary btn-sm">My Courses</a>
+
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                       class="btn btn-outline-secondary btn-sm">Logout</a>
+                       class="btn btn-outline-danger btn-sm">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

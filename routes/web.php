@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,9 +39,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 //User Routes
 Route::middleware(['auth', 'role:student'])->group(function () {
 
-    Route::get('/home', function () {
-        return view('home');
-    })->name('home');
+    Route::get('/home', [StudentController::class, 'index'])->name('home');
+
+    Route::post('/enroll', [StudentController::class, 'enroll'])->name('student.enroll');
+
+    Route::get('payment-success', function () {
+        return view('payment');
+    })->name('payment.index');
+
+    Route::get('/my-courses', [StudentController::class, 'courses'])->name('student.courses');
 
 
 });
