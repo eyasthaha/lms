@@ -35,7 +35,7 @@ class CourseController extends Controller
      */
     public function store(CourseRequest $request){
         
-        return $this->courseService->addCourse($request->validated());
+        $this->courseService->addCourse($request->validated());
 
         return redirect()->route('dashboard.index')->with('success', 'Course created successfully.');
     }
